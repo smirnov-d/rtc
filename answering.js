@@ -1,20 +1,37 @@
+window.addEventListener('DOMContentLoaded', function () {
+  // create socket client
+  // emit camera ready and share socket id
+
+
+})
+
+var socket = io('https://calm-sea-76928.herokuapp.com/');
+
+socket.on('offer', (data) => {
+  console.log('offer');
+  // textelement = document.getElementById('textoffer');
+  // textelement.value = JSON.stringify(data)
+  clickofferpasted(data);
+});
+
 function gotRemoteStream1(e) {
-  if (callievideo.srcObject !== e.streams[0]) {
-    callievideo.srcObject = e.streams[0];
-    callievideo.play();
+  // if (calleevideo.srcObject) return;
+  if (calleevideo.srcObject !== e.streams[0]) {
+    calleevideo.srcObject = e.streams[0];
+    calleevideo.play();
     console.log('pc1: received remote stream');
   }
 }
 /**/
-function clickofferpasted() {
+function clickofferpasted(offer) {
   console.log('clickremoteoffer');
   document.getElementById('buttonofferpasted').disabled = true;
   peerConnection = createPeerConnection(lasticecandidate);
   peerConnection.ontrack = gotRemoteStream1;
   peerConnection.ondatachannel = handledatachannel;
-  textelement = document.getElementById('textoffer');
-  textelement.readOnly = true;
-  offer = JSON.parse(textelement.value);
+  // textelement = document.getElementById('textoffer');
+  // textelement.readOnly = true;
+  // offer = JSON.parse(textelement.value);
   setRemotePromise = peerConnection.setRemoteDescription(offer);
   setRemotePromise.then(setRemoteDone, setRemoteFailed);
 }
@@ -43,6 +60,7 @@ function createAnswerFailed(reason) {
 }
 
 function setLocalDone() {
+  socket.emit('systemanswer', peerConnection.localDescription);
   console.log('setLocalDone');
 }
 
