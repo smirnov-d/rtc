@@ -12,6 +12,10 @@ socket.on('answer', (data) => {
   textelement = document.getElementById('textanswer');
   clickanswerpasted(data)
 });
+socket.on('new-icecandidate', (data) => {
+  console.log('new-icecandidate');
+  peerConnection.addIceCandidate(data);
+});
 
 var localStream;
 navigator.mediaDevices.getUserMedia({ video: true, audio: false })

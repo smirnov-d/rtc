@@ -14,6 +14,11 @@ socket.on('offer', (data) => {
   clickofferpasted(data);
 });
 
+socket.on('new-icecandidate', (data) => {
+  console.log('new-icecandidate');
+  peerConnection.addIceCandidate(data);
+});
+
 function gotRemoteStream1(e) {
   // if (calleevideo.srcObject) return;
   if (calleevideo.srcObject !== e.streams[0]) {
