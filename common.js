@@ -7,8 +7,12 @@ function chatlog(msg) {
 
 function createPeerConnection(lasticecandidate) {
   configuration = {
-    iceServers: [{
-      urls: "stun:stun.stunprotocol.org"}]};
+    iceServers: [
+      {
+        urls: "stun:stun.stunprotocol.org"
+      }
+    ]
+  };
   try {
     peerConnection = new RTCPeerConnection(configuration);
   } catch(err) {
@@ -62,3 +66,4 @@ function chatbuttonclick() {
   chatlog(text);
   textelement.value = '';
 }
+

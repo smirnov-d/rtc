@@ -1,3 +1,18 @@
+// список устройств (камер) enumerateDevices
+window.addEventListener('DOMContentLoaded', function () {
+  // create socket client
+  // check available rooms / cameras
+  // select camera
+  //
+})
+var socket = io('https://calm-sea-76928.herokuapp.com/');
+
+socket.on('answer', (data) => {
+  console.log('offer');
+  textelement = document.getElementById('textanswer');
+  clickanswerpasted(data)
+});
+
 var localStream;
 navigator.mediaDevices.getUserMedia({ video: true, audio: false })
   .then(function(stream) {
@@ -14,10 +29,8 @@ function clickcreateoffer() {
   document.getElementById('spanoffer').classList.toggle('invisible');
   peerConnection = createPeerConnection(lasticecandidate);
   // peerConnection.ontrack = gotRemoteStream1;
+  // localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
   localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
-  // peerConnection.onaddstream = function (stream) {
-  //
-  // };
   dataChannel = peerConnection.createDataChannel('chat');
   dataChannel.onopen = datachannelopen;
   dataChannel.onmessage = datachannelmessage;
@@ -26,9 +39,9 @@ function clickcreateoffer() {
 }
 
 // function gotRemoteStream1(e) {
-//   // if (callievideo.srcObject !== e.streams[0]) {
-//     callievideo.srcObject = e.streams[0];
-//     callievideo.play();
+//   // if (calleevideo.srcObject !== e.streams[0]) {
+//     calleevideo.srcObject = e.streams[0];
+//     calleevideo.play();
 //     // console.log('pc1: received remote stream');
 //   // }
 // }
@@ -45,6 +58,7 @@ function createOfferFailed(reason) {
 }
 
 function setLocalDone() {
+  socket.emit('system', peerConnection.localDescription)
   console.log('setLocalDone');
 }
 
@@ -58,21 +72,21 @@ function lasticecandidate() {
   textelement = document.getElementById('textoffer');
   offer = peerConnection.localDescription;
   textelement.value = JSON.stringify(offer);
-  document.getElementById('buttonoffersent').disabled = false;
+  // document.getElementById('buttonoffersent').disabled = false;
 }
 
-function clickoffersent() {
-  console.log('clickoffersent');
-  document.getElementById('spananswer').classList.toggle('invisible');
-  document.getElementById('buttonoffersent').disabled = true;
-}
+// function clickoffersent() {
+//   console.log('clickoffersent');
+//   document.getElementById('spananswer').classList.toggle('invisible');
+//   document.getElementById('buttonoffersent').disabled = true;
+// }
 
-function clickanswerpasted() {
+function clickanswerpasted(answer) {
   console.log('clickanswerpasted');
   document.getElementById('buttonanswerpasted').disabled = true;
   textelement = document.getElementById('textanswer');
   textelement.readOnly = true;
-  answer = JSON.parse(textelement.value);
+  // answer = JSON.parse(textelement.value);
   setRemotePromise = peerConnection.setRemoteDescription(answer);
   setRemotePromise.then(setRemoteDone, setRemoteFailed);
 }
