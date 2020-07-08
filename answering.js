@@ -16,7 +16,7 @@ socket.on('offer', (data) => {
 
 socket.on('new-icecandidate', (data) => {
   console.log('new-icecandidate');
-  peerConnection.addIceCandidate(data);
+  peerConnection.addIceCandidate(new RTCIceCandidate(data));
 });
 
 function gotRemoteStream1(e) {

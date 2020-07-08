@@ -14,7 +14,7 @@ socket.on('answer', (data) => {
 });
 socket.on('new-icecandidate', (data) => {
   console.log('new-icecandidate');
-  peerConnection.addIceCandidate(data);
+  peerConnection.addIceCandidate(new RTCIceCandidate(data));
 });
 
 var localStream;
