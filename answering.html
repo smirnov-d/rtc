@@ -11,30 +11,12 @@
 </head>
 
 <body>
-
-<h1>webrtc without signaling server demo.</h1>
-<video id="calleevideo" muted></video>
+<!--<video id="localvideo" muted></video>
+<video id="calleevideo" muted></video>-->
 <div id="chatlog" class="chatlog"></div>
 <input id="chatinput" type="text"  placeholder="type here" disabled>
 <button id="chatbutton" onclick="chatbuttonclick()" disabled>send</button>
 
-<p>
-answering to a connection offer from a peer
-</p>
-<p>
-please wait for peer to give offer and paste it below
-</p>
-<textarea id="textoffer"
-  placeholder="please paste offer from initiating side"></textarea>
-<button id="buttonofferpasted" onclick="clickofferpasted()">offer pasted</button>
-
-<span id="spananswer" class="invisible">
-<p>
-please send following answer to peer
-</p>
-<textarea id="textanswer" readonly
-  placeholder="please wait a few seconds"></textarea>
-</span>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script src="common.js"></script>
 <script src="answering.js"></script>

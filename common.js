@@ -1,3 +1,9 @@
+var socket = io('https://calm-sea-76928.herokuapp.com/');
+
+socket.on('new-icecandidate', (data) => {
+  console.log('new-icecandidate');
+  peerConnection.addIceCandidate(new RTCIceCandidate(data));
+});
 
 function chatlog(msg) {
   chatelement = document.getElementById('chatlog');
@@ -21,6 +27,7 @@ function createPeerConnection(lasticecandidate) {
   peerConnection.onicecandidate = handleicecandidate(lasticecandidate);
   peerConnection.onconnectionstatechange = handleconnectionstatechange;
   peerConnection.oniceconnectionstatechange = handleiceconnectionstatechange;
+
   return peerConnection;
 }
 

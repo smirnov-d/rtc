@@ -1,54 +1,30 @@
-// список устройств (камер) enumerateDevices
-window.addEventListener('DOMContentLoaded', function () {
-  // create socket client
-  // check available rooms / cameras
-  // select camera
-  //
-})
-var socket = io('https://calm-sea-76928.herokuapp.com/');
-
 socket.on('answer', (data) => {
   console.log('offer');
-  textelement = document.getElementById('textanswer');
   clickanswerpasted(data)
 });
-socket.on('new-icecandidate', (data) => {
-  console.log('new-icecandidate');
-  peerConnection.addIceCandidate(new RTCIceCandidate(data));
-});
 
-var localStream;
-navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-  .then(function(stream) {
-    localStream = stream;
-    // offervideo.srcObject = stream;
-    // offervideo.play();
-  }).catch(function(err) {
-  console.log("An error occurred: " + err);
-});
-/**/
+function gotRemoteStream(e) {
+  // if (calleevideo.srcObject) return;
+  if (calleevideo.srcObject !== e.streams[0]) {
+    calleevideo.srcObject = e.streams[0];
+    calleevideo.play();
+    console.log('pc1: received remote stream');
+  }
+}
+
 function clickcreateoffer() {
   console.log('clickcreateoffer');
-  document.getElementById('buttoncreateoffer').disabled = true;
-  document.getElementById('spanoffer').classList.toggle('invisible');
+  // document.getElementById('buttoncreateoffer').disabled = true;
+  // document.getElementById('spanoffer').classList.toggle('invisible');
   peerConnection = createPeerConnection(lasticecandidate);
-  // peerConnection.ontrack = gotRemoteStream1;
+  peerConnection.ontrack = gotRemoteStream;
   // localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
-  localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
   dataChannel = peerConnection.createDataChannel('chat');
   dataChannel.onopen = datachannelopen;
   dataChannel.onmessage = datachannelmessage;
-  createOfferPromise = peerConnection.createOffer();
+  createOfferPromise = peerConnection.createOffer({offerToReceiveVideo: true});
   createOfferPromise.then(createOfferDone, createOfferFailed);
 }
-
-// function gotRemoteStream1(e) {
-//   // if (calleevideo.srcObject !== e.streams[0]) {
-//     calleevideo.srcObject = e.streams[0];
-//     calleevideo.play();
-//     // console.log('pc1: received remote stream');
-//   // }
-// }
 
 function createOfferDone(offer) {
   console.log('createOfferDone');
@@ -73,9 +49,9 @@ function setLocalFailed(reason) {
 
 function lasticecandidate() {
   console.log('lasticecandidate');
-  textelement = document.getElementById('textoffer');
-  offer = peerConnection.localDescription;
-  textelement.value = JSON.stringify(offer);
+  // textelement = document.getElementById('textoffer');
+  // offer = peerConnection.localDescription;
+  // textelement.value = JSON.stringify(offer);
   // document.getElementById('buttonoffersent').disabled = false;
 }
 
@@ -87,9 +63,9 @@ function lasticecandidate() {
 
 function clickanswerpasted(answer) {
   console.log('clickanswerpasted');
-  document.getElementById('buttonanswerpasted').disabled = true;
-  textelement = document.getElementById('textanswer');
-  textelement.readOnly = true;
+  // document.getElementById('buttonanswerpasted').disabled = true;
+  // textelement = document.getElementById('textanswer');
+  // textelement.readOnly = true;
   // answer = JSON.parse(textelement.value);
   setRemotePromise = peerConnection.setRemoteDescription(answer);
   setRemotePromise.then(setRemoteDone, setRemoteFailed);
