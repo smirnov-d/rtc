@@ -26,7 +26,7 @@ function clickofferpasted(offer) {
   console.log('clickremoteoffer');
   // document.getElementById('buttonofferpasted').disabled = true;
   peerConnection = createPeerConnection(lasticecandidate);
-  peerConnection.ontrack = gotRemoteStream;
+  // peerConnection.ontrack = gotRemoteStream;
   localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
   peerConnection.ondatachannel = handledatachannel;
   // textelement = document.getElementById('textoffer');
