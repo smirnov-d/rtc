@@ -7,6 +7,7 @@ var localStream;
 navigator.mediaDevices.getUserMedia({ video: false, audio: true })
   .then(function(stream) {
     localStream = stream;
+    mute()
     // localvideo.srcObject = stream;
     // localvideo.play();
   }).catch(function(err) {
