@@ -10,17 +10,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="fill-height">
-    <!--<video style="display: none" autoplay loop playsinline>
-        <source src="blank.mp4" type="video/mp4" />
-    </video>-->
-    <!--<audio id="calleevideo"></audio>-->
-    <!---->
-    <video id="calleevideo" controls></video>
-    <div id="chatlog" class="chatlog"></div>
-    <input id="chatinput" type="text" placeholder="type here">
-    <button id="chatbutton" onclick="chatbuttonclick()">send</button>
-    <!---->
+<body class="fill-height" style="background: #000;">
+    <video id="calleevideo" controls style="display: none;"></video>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="common.js"></script>
