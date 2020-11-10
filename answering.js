@@ -14,19 +14,19 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
   }).catch(function(err) {
   console.log("An error occurred: " + err);
 });
-// function gotRemoteStream(e) {
-//   // if (calleevideo.srcObject) return;
-//   if (calleevideo.srcObject !== e.streams[0]) {
-//     calleevideo.srcObject = e.streams[0];
-//     calleevideo.play();
-//     console.log('pc1: received remote stream');
-//   }
-// }
+function gotRemoteStream(e) {
+  // if (calleevideo.srcObject) return;
+  if (calleevideo.srcObject !== e.streams[0]) {
+    calleevideo.srcObject = e.streams[0];
+    calleevideo.play();
+    console.log('pc1: received remote stream');
+  }
+}
 function clickofferpasted(offer) {
   console.log('clickremoteoffer');
   // document.getElementById('buttonofferpasted').disabled = true;
   peerConnection = createPeerConnection(lasticecandidate);
-  // peerConnection.ontrack = gotRemoteStream;
+  peerConnection.ontrack = gotRemoteStream;
   localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
   peerConnection.ondatachannel = handledatachannel;
   // textelement = document.getElementById('textoffer');
