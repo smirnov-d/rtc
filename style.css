@@ -1,7 +1,33 @@
-
-.invisible {
-  display: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+html {
+  font-size: 20px;
+}
+img,
+video {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+a {
+  color: #444;
+  text-decoration: none;
+  margin: 0 .5rem;
+}
+a:hover {
+  text-decoration: underline;
+}
+.fill-height {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+/**/
 
 .chatlog {
   height: 200px;

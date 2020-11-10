@@ -55,8 +55,8 @@ function handleiceconnectionstatechange(event) {
 function datachannelopen() {
   console.log('datachannelopen');
   chatlog('connected');
-  document.getElementById('chatinput').disabled = false;
-  document.getElementById('chatbutton').disabled = false;
+  // document.getElementById('chatinput').disabled = false;
+  // document.getElementById('chatbutton').disabled = false;
 }
 
 function datachannelmessage(message) {
