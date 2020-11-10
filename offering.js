@@ -4,7 +4,7 @@ socket.on('answer', (data) => {
 });
 
 var localStream;
-navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
   .then(function(stream) {
     localStream = stream;
     // localvideo.srcObject = stream;
@@ -20,6 +20,10 @@ function gotRemoteStream(e) {
     calleevideo.play();
     console.log('pc1: received remote stream');
   }
+}
+
+function mute() {
+  localStream.getTracks().forEach(track => track.enabled = !track.enabled);
 }
 
 function clickcreateoffer() {

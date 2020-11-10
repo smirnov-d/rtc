@@ -12,10 +12,12 @@
 
 <body>
 
-<video id="calleevideo" controls></video>
+<input type="checkbox" onclick="mute()">mute microphone</input>
+
+<video id="calleevideo" controls muted></video>
 <div id="chatlog" class="chatlog"></div>
-<input id="chatinput" type="text"  placeholder="type here" disabled>
-<button id="chatbutton" onclick="chatbuttonclick()" disabled>send</button>
+<input id="chatinput" type="text"  placeholder="type here">
+<button id="chatbutton" onclick="chatbuttonclick()">send</button>
 
 <p>
 <button id="buttoncreateoffer" onclick="clickcreateoffer()">connect</button>
