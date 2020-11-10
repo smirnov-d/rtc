@@ -3,6 +3,16 @@ socket.on('answer', (data) => {
   clickanswerpasted(data)
 });
 
+var localStream;
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+  .then(function(stream) {
+    localStream = stream;
+    // localvideo.srcObject = stream;
+    // localvideo.play();
+  }).catch(function(err) {
+  console.log("An error occurred: " + err);
+});
+
 function gotRemoteStream(e) {
   // if (calleevideo.srcObject) return;
   if (calleevideo.srcObject !== e.streams[0]) {
@@ -18,7 +28,7 @@ function clickcreateoffer() {
   // document.getElementById('spanoffer').classList.toggle('invisible');
   peerConnection = createPeerConnection(lasticecandidate);
   peerConnection.ontrack = gotRemoteStream;
-  // localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+  localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
   dataChannel = peerConnection.createDataChannel('chat');
   dataChannel.onopen = datachannelopen;
   dataChannel.onmessage = datachannelmessage;
