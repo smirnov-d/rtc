@@ -5,8 +5,8 @@ socket.on('offer', (data) => {
   clickofferpasted(data);
 });
 
-var localStream;
-navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+let localStream;
+navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true })
   .then(function(stream) {
     localStream = stream;
     // localvideo.srcObject = stream;
