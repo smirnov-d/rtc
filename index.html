@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="nanny.pwa.json">
 </head>
 <body class="fill-height">
     <img src="nanny.jpg" alt="Nanny">
@@ -16,5 +17,15 @@
         <a href="offering.html">Client</a>
         <a href="answering.html">Camera</a>
     </div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        self.addEventListener("load", async () => {
+          const container = navigator.serviceWorker;
+          if (container.controller === null) {
+            const reg = await container.register("sw.js");
+          }
+        });
+      }
+    </script>
 </body>
 </html>

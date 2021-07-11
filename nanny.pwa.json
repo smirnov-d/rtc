@@ -1,0 +1,12 @@
+{
+  "start_url": "./",
+  "name": "Nanny",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "./icon.jpg",
+      "sizes": "144x144",
+      "type": "image/jpg"
+    }
+  ]
+}
