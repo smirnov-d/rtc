@@ -1,12 +1,16 @@
 {
-  "start_url": "./",
   "name": "Nanny",
   "display": "standalone",
+  "short_name": "Nanny",
+  "description": "A reliable app for baby monitoring that works on any network. All you need is to connect two devices and transform them into an audio & video baby cam.",
   "icons": [
     {
-      "src": "./icon.jpg",
+      "src": "./icon.png",
       "sizes": "144x144",
-      "type": "image/jpg"
+      "type": "image/png"
     }
-  ]
+  ],
+  "start_url": "/index.html",
+  "theme_color": "white",
+  "background_color": "white"
 }
